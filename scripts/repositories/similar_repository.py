@@ -5,6 +5,10 @@ class similar_repository:
     def __init__(self):
         self.db = Db_Connection().connection()
         self.cursor = self.db.cursor()
+    
+    def __del__(self):
+        self.cursor.close()
+        self.db.close()
 
     def generate_table():
         return '''CREATE TABLE "similar" (

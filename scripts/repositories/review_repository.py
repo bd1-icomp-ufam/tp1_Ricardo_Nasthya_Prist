@@ -6,6 +6,10 @@ class review_repository:
         self.db = Db_Connection().connection()
         self.cursor = self.db.cursor()
 
+    def __del__(self):
+        self.cursor.close()
+        self.db.close()
+
     def generate_table():
         return '''CREATE TABLE review (
             id SERIAL PRIMARY KEY,

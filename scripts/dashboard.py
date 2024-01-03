@@ -7,6 +7,10 @@ class dashboard:
         self.db = Db_Connection().connection()
         self.cursor = self.db.cursor()
 
+    def __del__(self):
+        self.cursor.close()
+        self.db.close()
+
     def consulta_a(self, asin):
         print("# Consulta A)")
         query1 = sql.SQL('SELECT * FROM review WHERE product_asin = {} order by helpful desc, rating  desc limit 5').format(sql.Literal(asin))

@@ -10,6 +10,9 @@ class populate:
     def __init__(self):
         self.db = Db_Connection().connection()
 
+    def __del__(self):
+        self.db.close()
+
     def insert(self, item):
         group_id = None
         title = ''

@@ -1,75 +1,47 @@
-# Repositorio Base
-# Trabalho Prático 1 de Bancos de Dados I 
+# Banco de Dados I
 
-Os detalhes sobre o trablho prático estão disponíveis [aqui](https://docs.google.com/document/d/1CXf_y392fJ_KNTZbdr5TWSRgEuYXFPyGTJOh4DcqOdA/edit): 
+## 1º Trabalho
 
-## Copiando esse repositorio
+### Equipe
 
-Você deve ter uma conta no github. A criação de contas é gratis e o GitHub é importante para sua visa profissional e carreira
+- José Ricardo Sampaio Coutinho II - 22052568
+- Nasthya Barauna - 22050961
+- Tedy Prist - 22050676
 
-Para fazer isso siga esses passos:
+### Como executar
 
-https://user-images.githubusercontent.com/118348/229365938-48d261c8-b569-463c-bc00-462eb218b423.mp4
-
-Para entender melhor [git e github](https://www.alura.com.br/artigos/o-que-e-git-github).
-
-## Configurando
-
-### Docker e Docker Compose
-
-Instalando o [docker desktop e docker compose (Windows, Linux e Mac)](https://www.docker.com/products/docker-desktop/)
-
-Instalando na linha de comando
-
-[Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt) e [Docker Compose Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-pt)
-
-#### Como funciona o docker compose
-
-[Docker Compose - Explicado](https://blog.4linux.com.br/docker-compose-explicado/)
-
-### Postgres
-
-Criar pasta `postgres-data` na raiz do projeto. Essa pasta **não deve ser enviada** para o github.
-
-Depois você deve subir o docker-compose com o postgres. Da primeira vez vai demorar um pouco, e fique de olho nos logs para qualquer erro.
+No diretório raiz desse projeto, execute o seguinte comando para criar um container docker com a imagem do postgres:
 
 ```bash
 docker-compose up -d
 ```
 
-### Python
-
-Criar o ambiente virtual
+Em seguida execute o seguinte comando para instalar as dependências do python:
 
 ```bash
-python3 -m venv .tp1
+pip install -r requirements.txt
 ```
 
-Ativar o ambiente virtual
+#### Criando e populando as tabelas
+
+Caso precise mudar os parâmtros para acesso ao banco de dados, basta alterar os campos no arquivo **.env**
+
+O arquivo a ser executado para gerar e popular as tabelas do banco de dados chama-se **tp1_3.2.py** e é necessário passar como parâmetro de execução o nome do arquivo que será processado, da seguinte forma:
 
 ```bash
-source .tp1/bin/activate
+python3 scripts/tp1_3.2.py "scripts/resources/amazon-meta-test.txt"
 ```
 
-## Usando o postgres na sua maquina
+#### Executando as consultas
 
-Após subir, você conseguirá conectar no banco. Ele vem vazio e você terá que preencher ele com o que o trabalho pede.
+Para executar todas as consultas, execute o arquivo que chama-se **tp1_3.3.py** . Algumas consultas recebem parâmetros como entrada, os quais podem ser modificados no arquivo **dashboard.py**
 
 ```bash
-psql -h localhost -U postgres
+python3 scripts/tp1_3.3.py
 ```
 
-As credenciais são:
+### Observação
 
-```yaml
-username: postgres
-password: postgres
-```
+Foi adicionando um arquivo de teste chamado **amazon-meta-test.txt** apenas para facilitar o desenvolvimento rápido, porém ele conta com apenas uma fatia do arquivo original então os nem todas as consultas retornarão resultados completos devido a falta de dados.
 
-## Usando Python
-
-Para instalar bibliotecas necessarias para o trabalho, use o pip [DEPOIS de ativar o ambiente](#python) virtual.
-
-```bash
-pip install <biblioteca>
-```
+O arquivo principal **amazon-meta.txt** não está versionado neste repositório devido ao seu extenso tamanho, para sua utilização basta adicioná-lo à pasta "resources" e executar o comando descrito anteriormente e os resultados serão completos
